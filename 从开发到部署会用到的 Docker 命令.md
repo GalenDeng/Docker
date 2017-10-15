@@ -18,7 +18,7 @@ Docker is available in two editions: Community Edition (CE) and Enterprise Editi
 
 2. `linux环境下安装docker`
 ```
-sudo wget -qO- https://get.docker.com | sh
+ * sudo wget -qO- https://get.docker.com | sh
 
 解释：sudo:以普通用户执行只有root才能执行的操作  wget 下载命令 
       -q : 使到wget的下载输出显示不要那么多  -O- : 使到wget的输出直接输出到标准输出那里，而不是输出到文件中
@@ -27,18 +27,8 @@ sudo wget -qO- https://get.docker.com | sh
 
 这个操作会检测当前的linux的版本,然后以最合适的版本来安装
 
-result:
-[Galen@Galen ~]$ sudo wget -qO- https://get.docker.com | sh
-[sudo] password for Galen: 
-# Executing docker install script, commit: 490beaa
+* [Galen@Galen ~]$ sudo usermod -aG docker Galen //使到普通用户Galen加入到docker组中,而不用sudo来执行docker的命令
 
-Either your platform is not easily detectable or is not supported by this
-installer script.
-Please visit the following URL for more detailed installation instructions:
-
-https://docs.docker.com/engine/installation/
-
-[Galen@Galen ~]$ 
 ```
 3. `显示当前的shell`
 ```
@@ -105,3 +95,133 @@ nodev	aufs
 5)查看docker的日志
 * cat /var/log/docker
 ```
+6. `查看docker的信息`
+```
+[Galen@Galen ~]$ sudo docker info
+[sudo] password for Galen: 
+Containers: 0
+Images: 0
+Storage Driver: aufs
+ Root Dir: /var/lib/docker/aufs
+ Backing Filesystem: extfs
+ Dirs: 0
+ Dirperm1 Supported: false
+Execution Driver: native-0.2
+Logging Driver: json-file
+Kernel Version: 3.10.5-3.el6.x86_64
+Operating System: <unknown>
+CPUs: 1
+Total Memory: 989.6 MiB
+Name: Galen
+ID: 26GV:N23Z:OXPC:VSTK:7GLQ:2YRG:BX2S:YLRM:LLYB:4UHF:FDXI:VFVC
+WARNING: No swap limit support
+[Galen@Galen ~]$ 
+```
+7. `查看某一个command的详细使用方法`
+```
+docker COMMAND --help
+```
+8. `快速执行`
+```
+sudo docker run centos echo hello docker
+这里我们不用手动打开centos虚拟机，然后执行脚本，而是通过一条命令就实现该
+功能，这正式docker的优势所在。
+```
+
+*ubuntu64---kernel:4.4.0-31-generic 安装docker*
+`使用安装脚本安装docker`
+* sudo wget -qO- https://get.docker.com | sh
+* sudo usermod  -aG docker galen
+* docker info
+```
+galen@galen-virtual:~$ docker info
+Containers: 0
+ Running: 0
+ Paused: 0
+ Stopped: 0
+Images: 0
+Server Version: 17.09.0-ce
+Storage Driver: overlay2
+ Backing Filesystem: extfs
+ Supports d_type: true
+ Native Overlay Diff: false
+Logging Driver: json-file
+Cgroup Driver: cgroupfs
+Plugins:
+ Volume: local
+ Network: bridge host macvlan null overlay
+ Log: awslogs fluentd gcplogs gelf journald json-file logentries splunk syslog
+Swarm: inactive
+Runtimes: runc
+Default Runtime: runc
+Init Binary: docker-init
+containerd version: 06b9cb35161009dcb7123345749fef02f7cea8e0
+runc version: 3f2f8b84a77f73d38244dd690525642a72156c64
+init version: 949e6fa
+Security Options:
+ apparmor
+ seccomp
+  Profile: default
+Kernel Version: 4.4.0-31-generic
+Operating System: Ubuntu 16.04.1 LTS
+OSType: linux
+Architecture: x86_64
+CPUs: 1
+Total Memory: 983.8MiB
+Name: galen-virtual
+ID: UFX6:QS66:LYKS:WTET:DEAF:O3UJ:JM3N:27HT:OSSZ:MYK2:VCLR:PSCV
+Docker Root Dir: /var/lib/docker
+Debug Mode (client): false
+Debug Mode (server): false
+Registry: https://index.docker.io/v1/
+Experimental: false
+Insecure Registries:
+ 127.0.0.0/8
+Live Restore Enabled: false
+
+WARNING: No swap limit support
+galen@galen-virtual:~$ 
+```
+9. `查看本地有哪些镜像`
+```
+galen@galen-virtual:~$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+nginx               latest              1e5ab59102ce        5 days ago          108MB
+galen@galen-virtual:~$ 
+```
+10. `运行nginx`
+```
+$ docker run -p 8080:80 -d nginx  // -p:端口映射 把docker的80端口映射到本地的8080端口 -d 允许程序直接返回
+a53cf6e91301d2a14368b95c4f62b17651bd866c2d824d5f3a9b4b2df843986b  //ID
+```
+11. `查看当前正在运行的容器(container)`
+```
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
+a53cf6e91301        nginx               "nginx -g 'daemon ..."   3 minutes ago       Up 3 minutes        0.0.0.0:8080->80/tcp   youthful_archimedes
+cca6383355e4        nginx               "nginx -g 'daemon ..."   7 minutes ago       Up 7 minutes        80/tcp                 vigilant_montalcini
+```
+* 可以看到我们刚才启动的nginx的服务，其ID为：`a53cf6e91301(container ID)`
+* `0.0.0.0:8080->80/tcp`  为 `端口映射`的关系
+
+* 此时我们可以在浏览器`测试这个启动的nginx是否正常`
+http://192.168.135.128:8080/
+
+* 我们可以`修改nginx的主页`:
+1) 通过新建一个html的页面,如：
+```
+vim index.html
+
+<html>
+<h1>Docker is fun</h1>
+</html>
+```
+2) docker cp index.html a53cf6e91301://usr/share/nginx/html  // a53cf6e91301为容器的ID /usr/share/nginx/html 为放置的路径
+
+12. `停止容器`
+```
+galen@galen-virtual:~$ docker stop a53cf6e91301
+a53cf6e91301
+```
+
+
