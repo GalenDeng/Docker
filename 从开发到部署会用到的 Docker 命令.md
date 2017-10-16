@@ -1,5 +1,11 @@
 ## 容器技术：从开发到部署会用到的 Docker  (2017.10.14)
 
+```
+ubuntu64
+The program 'docker' is currently not installed. You can install it by typing:
+sudo apt install docker.io
+```
+
 `容器技术、Docker`
 ```
 容器技术的本质： 兼容程序,隔离，打包的技术
