@@ -270,6 +270,7 @@ d32a0176fdbf        nginx               "nginx -g 'daemon off"   2 hours ago    
 ```
 clear
 ```
+
 18. `命令小结`
 * docker pull   获取image
 * docker build  创建image
