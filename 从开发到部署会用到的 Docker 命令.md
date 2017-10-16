@@ -229,5 +229,55 @@ vim index.html
 galen@galen-virtual:~$ docker stop a53cf6e91301
 a53cf6e91301
 ```
+13. `容器内做的改动都是暂时的`
+```
+* docker cp index.html a53cf6e91301://usr/share/nginx/html  
+* docker stop a53cf6e91301 //当我们把这个容器停止后，我们之前执行的 docker cp index.html a53cf6e91301://usr/share/nginx/html 的效果将不存在，
+  容器内做的改动都是暂时的
+*** 这个时候需要进行容器的保存操作： 
+* docker cp index.html a53cf6e91301://usr/share/nginx/html
+* docker commmit -m 'fun' a53cf6e91301(容器的ID) nginx-fun(新的容器名字)
 
+查看一下本地的镜像是否创建了一个新的镜像
+galen@galen-virtual:~$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
+nginx-fun           latest              1063fd523ac3        About a minute ago   108.3 MB
+nginx               latest              1e5ab59102ce        6 days ago           108.3 MB
+```
+14. `删除镜像`
+```
+docker rmi 1063fd523ac3
+```
+15. `列出所有的容器(包括正在运行的以及还没运行的)`
+```
+docker ps -a
+```
+16. `删除已有的记录`
+```
+galen@galen-virtual:~$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                     PORTS               NAMES
+2848dc53f981        nginx               "nginx -g 'daemon off"   2 hours ago         Exited (0) 2 minutes ago                       sick_brahmagupta
+ff23f315d802        nginx               "nginx -g 'daemon off"   2 hours ago         Created                                        determined_goodall
+d32a0176fdbf        nginx               "nginx -g 'daemon off"   2 hours ago         Exited (0) 2 hours ago                         lonely_poincare
+galen@galen-virtual:~$ docker rm 2848dc53f981 ff23f315d802
+2848dc53f981
+ff23f315d802
+galen@galen-virtual:~$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                   PORTS               NAMES
+d32a0176fdbf        nginx               "nginx -g 'daemon off"   2 hours ago         Exited (0) 2 hours ago                       lonely_poincare
+```
+17. `清屏操作`
+```
+clear
+```
+18. `命令小结`
+* docker pull   获取image
+* docker build  创建image
+* docker images 列出image
+* docker run    运行container
+* docker ps     列出container
+* docker rm     删除container
+* docker rmi    删除image
+* docker cp     在host和conatainer之间拷贝
+* docker commit 保存改动为新的image
 
