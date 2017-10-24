@@ -13,7 +13,7 @@ MAINTAINER galen                         //作者
 RUN sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list  //将
 /etc/apt/sources.list 使用国内的镜像进行加速操作
 RUN apt-get update                       //更新软件源
-RUN apt-get install -y mginx             //安装nginx
+RUN apt-get install -y nginx             //安装nginx
 COPY index.html /var/www/html            //复制要显示的html页面到相对应的路径中
 ENTRYPOINT ["/usr/sbin/nginx","-g","daemon off;"]   //设置入口 前台启动nginx 而不是守护进程
 EXPOSE 80                                //暴露端口
