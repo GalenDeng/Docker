@@ -110,7 +110,7 @@ unauthorized: authentication required
 ```
 * `登录`
 ```
-docker login
+* docker login
 ```
 
 
