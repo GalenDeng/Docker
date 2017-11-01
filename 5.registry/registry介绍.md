@@ -1,4 +1,4 @@
-## registry介绍 --- 镜像仓库 (2017.11.31)
+## registry介绍 --- 镜像仓库 (2017.10.31)
 * 术语 ： daemon : 守护程序
 * docker search whalesay : 搜索镜像
 * docker pull whalesay   : 拉取镜像
