@@ -118,6 +118,25 @@ Password:
 Login Succeeded
 ```
 * docker push xibeifeng/whalesay
+```
+推送成功：
+galen@galen-virtual:~$ docker push galen/whalesay
+The push refers to a repository [docker.io/galen/whalesay]
+An image does not exist locally with the tag: galen/whalesay
+galen@galen-virtual:~$ docker push galendeng/whalesay
+The push refers to a repository [docker.io/galendeng/whalesay]
+5f70bf18a086: Mounted from docker/whalesay 
+d061ee1340ec: Mounted from docker/whalesay 
+d511ed9e12e1: Mounted from docker/whalesay 
+091abc5148e4: Mounted from docker/whalesay 
+b26122d57afa: Mounted from docker/whalesay 
+37ee47034d9b: Pushed 
+528c8710fd95: Mounted from docker/whalesay 
+1154ba695078: Mounted from docker/whalesay 
+latest: digest: sha256:44f57bbd848c9fbbda609cf6ad1d5c86297302c434268414e83ac9d9ec7724c0 size: 2402
+```
+* 然后查看一下我的docker ID 是否存在这个public镜像
+* [我的docker地址](https://hub.docker.com/r/galendeng/whalesay/)
 9. `一般Dockerfile都会在docker.hub的官网上介绍其使用方式`
 
 
