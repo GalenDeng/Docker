@@ -94,7 +94,7 @@ docker/whalesay      latest              6b362a9f73eb        2 years ago        
 ```
 docker push xibeifeng/whalesay    //默认tag为lastest
 ```
-* 若出现以下现象，表示还没登录
+* `若出现以下现象，表示还没登录到docker ID账号`
 ```
   ~ docker push xibeifeng/whalesay
 The push refers to a repository [docker.io/xibeifeng/whalesay]
@@ -108,9 +108,16 @@ b26122d57afa: Preparing
 1154ba695078: Waiting 
 unauthorized: authentication required
 ```
-* `登录`
-```
+* `登录docker ID,然后推送镜像`
 * docker login
 ```
+➜  ~ docker login
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: galendeng
+Password: 
+Login Succeeded
+```
+* docker push xibeifeng/whalesay
+9. `一般Dockerfile都会在docker.hub的官网上介绍其使用方式`
 
 
