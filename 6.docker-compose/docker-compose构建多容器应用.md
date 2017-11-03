@@ -33,14 +33,14 @@ total 8
 -rw-rw-r-- 1 galen galen 778 11月  2 20:14 config.js
 -rw-rw-r-- 1 galen galen 100 11月  2 19:19 Dockerfile
 * touch Dockerfile   //取现成的ghost
-[Dockerfile文件内容]()
+[Dockerfile文件内容](https://github.com/GalenDeng/Docker/blob/master/6.docker-compose/ghost/ghost/Dockerfile)
 * touch config.js    //创建配置文件
-[配置内容]()
+[配置内容](https://github.com/GalenDeng/Docker/blob/master/6.docker-compose/ghost/ghost/config.js)
 * cd ../nginx
 * touch Dockerfile
-[Dockerfile文件内容]()
+[Dockerfile文件内容](https://github.com/GalenDeng/Docker/blob/master/6.docker-compose/ghost/nginx/Dockerfile)
 * touch nginx.conf
-[nginx.conf配置]()
+[nginx.conf配置](https://github.com/GalenDeng/Docker/blob/master/6.docker-compose/ghost/nginx/nginx.conf)
 ```
 galen@galen-virtual:~/ghost/nginx$ ls -lt
 total 8
@@ -49,7 +49,7 @@ total 8
 galen@galen-virtual:~/ghost/nginx$
 ```
 * galen@galen-virtual:~/ghost$ touch docker-compose.yml
-[docker-compose.yml内容]()
+[docker-compose.yml内容](https://github.com/GalenDeng/Docker/blob/master/6.docker-compose/ghost/docker-compose.yml)
 * 注意`以下的两个db是相对应的`，docker-compose是`通过名字来解析`的
 ```
                         connection: {
