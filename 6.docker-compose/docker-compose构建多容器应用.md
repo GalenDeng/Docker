@@ -92,3 +92,5 @@ For more on the Compose file format versions, see https://docs.docker.com/compos
 * -d : 表示把所有的容器以daemon的形式运行起来
 ```
 
+* [安装说明](http://www.linuxidc.com/Linux/2016-12/138489.htm)
+
