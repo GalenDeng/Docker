@@ -282,3 +282,17 @@ clear
 * docker cp     在host和conatainer之间拷贝
 * docker commit 保存改动为新的image
 
+19. `每秒打印一个Hello world`
+* sudo docker run -i -t b15 /bin/sh -c "while true;do echo hello world;sleep 1;done"
+```
+-t : 分配一个终端
+-i : 同步Container的stdin
+```
+20. `文件卷标加载`
+* docker run --rm=true -i --name=ls-volume -v /etc/:/opt/etc
+```
+* -v : -v的后面的：的前面是本地主机路径，右侧为对应的Container的路径
+* --rm=true : 表示这个Container运行结束后自动删除
+```
+21. `只读挂载`
+* -v /etc:/opt/etc:ro
