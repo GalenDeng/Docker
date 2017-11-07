@@ -179,3 +179,41 @@ docker build -t dockerfile_web .
 docker run --name web -p 5000:5000 -v $(pwd):/code --link redis:webredis dockerfile_web
 ```
 * 这样也能得到同样的效果，但是，对于复杂的容器编排情况，还是乖乖地使用docker-compose等利器吧。
+
+* `查看可选选项的作用`
+* galen@galen-virtual:~/composetest$ docker build -help
+```
+galen@galen-virtual:~/composetest$ docker build -help
+Flag shorthand -h has been deprecated, please use --help
+unknown shorthand flag: 'e' in -elp
+See 'docker build --help'.
+galen@galen-virtual:~/composetest$ docker build --help
+
+Usage:  docker build [OPTIONS] PATH | URL | -
+
+Build an image from a Dockerfile
+
+Options:
+      --build-arg value         Set build-time variables (default [])
+      --cgroup-parent string    Optional parent cgroup for the container
+      --cpu-period int          Limit the CPU CFS (Completely Fair Scheduler) period
+      --cpu-quota int           Limit the CPU CFS (Completely Fair Scheduler) quota
+  -c, --cpu-shares int          CPU shares (relative weight)
+      --cpuset-cpus string      CPUs in which to allow execution (0-3, 0,1)
+      --cpuset-mems string      MEMs in which to allow execution (0-3, 0,1)
+      --disable-content-trust   Skip image verification (default true)
+  -f, --file string             Name of the Dockerfile (Default is 'PATH/Dockerfile')
+      --force-rm                Always remove intermediate containers
+      --help                    Print usage
+      --isolation string        Container isolation technology
+      --label value             Set metadata for an image (default [])
+  -m, --memory string           Memory limit
+      --memory-swap string      Swap limit equal to memory plus swap: '-1' to enable unlimited swap
+      --no-cache                Do not use cache when building the image
+      --pull                    Always attempt to pull a newer version of the image
+  -q, --quiet                   Suppress the build output and print image ID on success
+      --rm                      Remove intermediate containers after a successful build (default true)
+      --shm-size string         Size of /dev/shm, default value is 64MB
+  -t, --tag value               Name and optionally a tag in the 'name:tag' format (default [])
+      --ulimit value            Ulimit options (default [])
+```
